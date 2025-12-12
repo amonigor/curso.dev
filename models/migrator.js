@@ -1,4 +1,5 @@
-import database from "infra/database";
+import database from "infra/database.js";
+import { ServiceError } from "infra/errors.js";
 import migrationRunner from "node-pg-migrate";
 import { resolve } from "node:path";
 
@@ -20,6 +21,12 @@ async function listPendingMigrations() {
       dbClient,
     });
     return pendingMigrations;
+  } catch (error) {
+    const serviceErrorObject = new ServiceError({
+      message: "Erro ao listar migrations pendentes.",
+      cause: error,
+    });
+    throw serviceErrorObject;
   } finally {
     await dbClient?.end();
   }
@@ -38,6 +45,12 @@ async function runPendingMigrations() {
     });
 
     return migratedMigrations;
+  } catch (error) {
+    const serviceErrorObject = new ServiceError({
+      message: "Erro ao executar migrations pendentes.",
+      cause: error,
+    });
+    throw serviceErrorObject;
   } finally {
     await dbClient?.end();
   }
