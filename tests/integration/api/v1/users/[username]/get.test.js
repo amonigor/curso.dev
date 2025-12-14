@@ -36,14 +36,14 @@ describe("GET /api/v1/users/[username]", () => {
         id: respons2eBody.id,
         username: "MesmoCase",
         email: "mesmo.case@email.com",
-        password: "senha123",
+        password: respons2eBody.password,
         created_at: respons2eBody.created_at,
         updated_at: respons2eBody.updated_at,
       });
 
       expect(uuidVersion(respons2eBody.id)).toBe(4);
-      expect(Date.parse(respons2eBody.created_at)).not.toBe(NaN);
-      expect(Date.parse(respons2eBody.updated_at)).not.toBe(NaN);
+      expect(Date.parse(respons2eBody.created_at)).not.toBeNaN();
+      expect(Date.parse(respons2eBody.updated_at)).not.toBeNaN();
     });
 
     test("With exact case mismatch", async () => {
@@ -73,17 +73,17 @@ describe("GET /api/v1/users/[username]", () => {
         id: respons2eBody.id,
         username: "CaseDiferente",
         email: "case.diferente@email.com",
-        password: "senha123",
+        password: respons2eBody.password,
         created_at: respons2eBody.created_at,
         updated_at: respons2eBody.updated_at,
       });
 
       expect(uuidVersion(respons2eBody.id)).toBe(4);
-      expect(Date.parse(respons2eBody.created_at)).not.toBe(NaN);
-      expect(Date.parse(respons2eBody.updated_at)).not.toBe(NaN);
+      expect(Date.parse(respons2eBody.created_at)).not.toBeNaN();
+      expect(Date.parse(respons2eBody.updated_at)).not.toBeNaN();
     });
 
-    test("With nonexistent username", async () => {
+    test("With nonexistent 'username'", async () => {
       const response = await fetch(
         "http://localhost:3000/api/v1/users/UsuarioInexistente",
       );
