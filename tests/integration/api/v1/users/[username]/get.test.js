@@ -42,8 +42,8 @@ describe("GET /api/v1/users/[username]", () => {
       });
 
       expect(uuidVersion(respons2eBody.id)).toBe(4);
-      expect(Date.parse(respons2eBody.created_at)).not.toBe(NaN);
-      expect(Date.parse(respons2eBody.updated_at)).not.toBe(NaN);
+      expect(Date.parse(respons2eBody.created_at)).not.toBeNaN();
+      expect(Date.parse(respons2eBody.updated_at)).not.toBeNaN();
     });
 
     test("With exact case mismatch", async () => {
@@ -79,8 +79,8 @@ describe("GET /api/v1/users/[username]", () => {
       });
 
       expect(uuidVersion(respons2eBody.id)).toBe(4);
-      expect(Date.parse(respons2eBody.created_at)).not.toBe(NaN);
-      expect(Date.parse(respons2eBody.updated_at)).not.toBe(NaN);
+      expect(Date.parse(respons2eBody.created_at)).not.toBeNaN();
+      expect(Date.parse(respons2eBody.updated_at)).not.toBeNaN();
     });
 
     test("With nonexistent username", async () => {
