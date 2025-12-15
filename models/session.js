@@ -20,7 +20,7 @@ async function findOneValidByToken(sessionToken) {
           AND expires_at > NOW()
         LIMIT
           1
-      `,
+        ;`,
       values: [sessionToken],
     });
 
